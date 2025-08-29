@@ -21,7 +21,8 @@ type PortfolioCategory = {
   subcategories?: PortfolioSubcategory[];
 };
 
-const ADMIN_PASSWORD = 'REMOVED_PASSWORD';
+
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || '';
 
 export default function AdminPage() {
   const { t } = useLanguage();

@@ -22,18 +22,18 @@ export default function App() {
     const observer = new IntersectionObserver((entries) => {
       // Найдем секцию с наибольшим пересечением
       let maxIntersection = 0;
-      let activeEntry: IntersectionObserverEntry | null = null;
+      let activeSection = '';
       
       entries.forEach((entry) => {
         if (entry.isIntersecting && entry.intersectionRatio > maxIntersection) {
           maxIntersection = entry.intersectionRatio;
-          activeEntry = entry;
+          activeSection = entry.target.id;
         }
       });
 
-      if (activeEntry) {
-        console.log('Active section:', activeEntry.target.id); // Добавляем лог для отладки
-        setActiveSection(activeEntry.target.id);
+      if (activeSection) {
+        console.log('Active section:', activeSection); // Добавляем лог для отладки
+        setActiveSection(activeSection);
       }
     }, observerOptions);
 

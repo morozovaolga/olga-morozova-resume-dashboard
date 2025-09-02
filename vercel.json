@@ -2,19 +2,8 @@
   "buildCommand": "vite build",
   "outputDirectory": "dist",
   "framework": "vite",
-  "routes": [
-    {
-      "src": "/olga/portfolio/(.*)",
-      "dest": "/olga/portfolio/"
-    },
-    {
-      "src": "/olga/portfolio",
-      "dest": "/olga/portfolio/"
-    }
-  ],
   "rewrites": [
-    { "source": "/olga/portfolio/(.*)", "destination": "/olga/portfolio/" },
-    { "source": "/olga/portfolio", "destination": "/olga/portfolio/" }
+    { "source": "/(.*)", "destination": "/" }
   ],
   "headers": [
     {

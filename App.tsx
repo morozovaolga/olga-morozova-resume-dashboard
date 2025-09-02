@@ -15,16 +15,26 @@ export default function App() {
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]');
     const observerOptions = {
-      rootMargin: '-20% 0px -70% 0px',
-      threshold: 0.1
+      rootMargin: '-10% 0px -50% 0px', // Более мягкие настройки
+      threshold: [0.1, 0.3, 0.5] // Множественные пороги
     };
 
     const observer = new IntersectionObserver((entries) => {
+      // Найдем секцию с наибольшим пересечением
+      let maxIntersection = 0;
+      let activeEntry: IntersectionObserverEntry | null = null;
+      
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+        if (entry.isIntersecting && entry.intersectionRatio > maxIntersection) {
+          maxIntersection = entry.intersectionRatio;
+          activeEntry = entry;
         }
       });
+
+      if (activeEntry) {
+        console.log('Active section:', activeEntry.target.id); // Добавляем лог для отладки
+        setActiveSection(activeEntry.target.id);
+      }
     }, observerOptions);
 
     sections.forEach((section) => {

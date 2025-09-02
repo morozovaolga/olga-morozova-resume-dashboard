@@ -53,6 +53,7 @@ export function Navigation({ activeSection, setActiveSection }: NavigationProps)
     { id: 'skills', label: t('nav.skills') },
     { id: 'experience', label: t('nav.experience') },
     { id: 'portfolio', label: t('nav.portfolio') },
+    { id: 'education', label: t('nav.education') },
     { id: 'contact', label: t('nav.contact') }
   ];
 

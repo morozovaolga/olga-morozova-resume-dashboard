@@ -55,6 +55,7 @@ const translations = {
     'nav.experience': 'Experience',
     'nav.skills': 'Skills',
     'nav.portfolio': 'Portfolio',
+    'nav.education': 'Education',
     'nav.contact': 'Contact',
     
     // Hero Section
@@ -230,6 +231,7 @@ const translations = {
     'nav.experience': 'Опыт',
     'nav.skills': 'Навыки',
     'nav.portfolio': 'Портфолио',
+    'nav.education': 'Образование',
     'nav.contact': 'Контакты',
     
     // Hero Section
@@ -405,6 +407,7 @@ const translations = {
     'nav.experience': 'Expérience',
     'nav.skills': 'Compétences',
     'nav.portfolio': 'Portfolio',
+    'nav.education': 'Éducation',
     'nav.contact': 'Contact',
 
     // Hero Section

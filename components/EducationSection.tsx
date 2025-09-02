@@ -30,7 +30,7 @@ export function EducationSection() {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section id="education" className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

@@ -47,7 +47,7 @@ export function HeroSection() {
         <meta property="twitter:description" content={currentMeta.description} />
       </Helmet>
       <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-50 to-white pt-24">
-        <div className="max-w-6xl mx-auto px-6 py-8 sm:py-16 lg:py-20 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="max-w-6xl mx-auto px-6 py-4 sm:py-8 lg:py-12 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
           
           {/* Текстовая часть */}
           <motion.div
@@ -60,15 +60,15 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="mb-6"
+              className="mb-4 sm:mb-6"
             >
-              <h1 className="text-4xl lg:text-5xl mb-4 text-gray-900">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl mb-3 sm:mb-4 text-gray-900">
                 {t('hero.title')}
               </h1>
-              <p className="text-xl lg:text-2xl text-gray-600 mb-6">
+              <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-4 sm:mb-6">
                 {t('hero.subtitle')}
               </p>
-              <p className="text-lg text-gray-500 mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-500 mb-6 sm:mb-8 leading-relaxed">
                 {t('hero.description')}
               </p>
             </motion.div>
@@ -78,7 +78,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="space-y-6"
+              className="space-y-4 sm:space-y-6"
             >
               {/* Контакты в две колонки */}
               <div className="grid grid-cols-2 gap-3 text-sm text-gray-600">
@@ -137,7 +137,7 @@ export function HeroSection() {
             className="relative order-first lg:order-last"
           >
             {/* Мобильная версия - горизонтальная */}
-            <div className="relative w-80 h-60 sm:w-96 sm:h-72 mx-auto lg:hidden">
+            <div className="relative w-72 h-52 sm:w-80 sm:h-60 lg:w-96 lg:h-72 mx-auto lg:hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 rounded-3xl transform rotate-3"></div>
               <div className="relative bg-white p-2 rounded-3xl shadow-2xl h-full">
                 <ImageWithFallback
@@ -149,7 +149,7 @@ export function HeroSection() {
             </div>
             
             {/* Десктопная версия - вертикальная */}
-            <div className="relative w-96 h-[28rem] mx-auto hidden lg:block">
+            <div className="relative w-80 h-[24rem] lg:w-96 lg:h-[28rem] mx-auto hidden lg:block">
               <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 rounded-3xl transform rotate-6"></div>
               <div className="relative bg-white p-2 rounded-3xl shadow-2xl h-full">
                 <ImageWithFallback
@@ -160,17 +160,16 @@ export function HeroSection() {
               </div>
             </div>
             
-            {/* Дополнительный отступ снизу для стрелки */}
-            <div className="h-16 lg:h-8"></div>
+            {/* Дополнительный отступ снизу для стрелки - убираем лишний отступ */}
           </motion.div>
         </div>
 
-        {/* Анимированная стрелка */}
+        {/* Анимированная стрелка - возвращаем в нижнюю часть экрана */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.5 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}

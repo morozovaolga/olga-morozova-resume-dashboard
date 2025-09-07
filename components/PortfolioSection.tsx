@@ -17,7 +17,42 @@ type PortfolioCategory = {
 };
 
 // Исправляем типизацию t
-function getDefaultPortfolio(t: (key: any) => string): PortfolioCategory[] {
+function getDefaultPortfolio(t: (key: any) => string, language: string): PortfolioCategory[] {
+  // Временные переводы для нового раздела с поддержкой всех языков
+  const tempTranslations: { [lang: string]: { [key: string]: string } } = {
+    ru: {
+      'portfolio.graphicDesign': 'Графический дизайн',
+      'portfolio.socialIllustrations': 'Иллюстрации для соцсетей', 
+      'portfolio.socialIllustrationsDesc': 'Коллекция иллюстраций для постов в социальных сетях и рекламных материалов',
+      'portfolio.bookCovers': 'Книжные обложки',
+      'portfolio.bookCoversDesc': 'Креативные дизайны обложек книг с современной типографикой и визуальными элементами',
+      'portfolio.postersAndDiplomas': 'Постеры и дипломы',
+      'portfolio.postersAndDiplomasDesc': 'Постеры для мероприятий, сертификаты и дипломы для различных организаций'
+    },
+    en: {
+      'portfolio.graphicDesign': 'Graphic Design',
+      'portfolio.socialIllustrations': 'Social Media Illustrations',
+      'portfolio.socialIllustrationsDesc': 'Collection of illustrations for social media posts and promotional materials',
+      'portfolio.bookCovers': 'Book Covers',
+      'portfolio.bookCoversDesc': 'Creative book cover designs with modern typography and visual elements',
+      'portfolio.postersAndDiplomas': 'Posters and Diplomas',
+      'portfolio.postersAndDiplomasDesc': 'Event posters, certificates, and diploma designs for various organizations'
+    },
+    fr: {
+      'portfolio.graphicDesign': 'Design Graphique',
+      'portfolio.socialIllustrations': 'Illustrations pour les Réseaux Sociaux',
+      'portfolio.socialIllustrationsDesc': 'Collection d\'illustrations pour les publications sur les réseaux sociaux et matériaux promotionnels',
+      'portfolio.bookCovers': 'Couvertures de Livres',
+      'portfolio.bookCoversDesc': 'Designs créatifs de couvertures de livres avec typographie moderne et éléments visuels',
+      'portfolio.postersAndDiplomas': 'Affiches et Diplômes',
+      'portfolio.postersAndDiplomasDesc': 'Affiches d\'événements, certificats et diplômes pour diverses organisations'
+    }
+  };
+  
+  const getTempTranslation = (key: string) => {
+    const langTranslations = tempTranslations[language] || tempTranslations['ru'];
+    return langTranslations[key] || t(key);
+  };
   return [
     {
       category: t('portfolio.landingProjects'),
@@ -128,19 +163,40 @@ function getDefaultPortfolio(t: (key: any) => string): PortfolioCategory[] {
           description: t('portfolio.texts5Desc')
         }
       ]
+    },
+    {
+      category: getTempTranslation('portfolio.graphicDesign'),
+      mockupImage: "https://ladobor.ru/olga/portfolio/img/cover.jpg",
+      items: [
+        {
+          title: getTempTranslation('portfolio.socialIllustrations'),
+          url: "https://morozova31.tilda.ws/social",
+          description: getTempTranslation('portfolio.socialIllustrationsDesc')
+        },
+        {
+          title: getTempTranslation('portfolio.bookCovers'),
+          url: "https://morozova31.tilda.ws/covers",
+          description: getTempTranslation('portfolio.bookCoversDesc')
+        },
+        {
+          title: getTempTranslation('portfolio.postersAndDiplomas'),
+          url: "https://morozova31.tilda.ws/posters",
+          description: getTempTranslation('portfolio.postersAndDiplomasDesc')
+        }
+      ]
     }
   ];
 }
 
 export function PortfolioSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [portfolio, setPortfolio] = useState<PortfolioCategory[]>([]);
 
   // Инициализация из localStorage или дефолт
   useEffect(() => {
     // Всегда используем переводы для текущего языка
-    setPortfolio(getDefaultPortfolio(t));
-  }, [t]);
+    setPortfolio(getDefaultPortfolio(t, language));
+  }, [t, language]);
 
   // ...далее используем portfolio вместо portfolioItems
 

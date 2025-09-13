@@ -6,8 +6,20 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { useLanguage } from '../contexts/LanguageContext';
-import { generateWordDocument, downloadWordDocument } from '../utils/portfolioGenerator';
 import { useState } from 'react';
+
+// Динамический импорт для проверки
+async function importUtils() {
+  try {
+    console.log('Attempting dynamic import...');
+    const module = await import('../utils/portfolioGenerator');
+    console.log('Import successful:', module);
+    return module;
+  } catch (error) {
+    console.error('Dynamic import failed:', error);
+    return null;
+  }
+}
 
 export function ContactSection() {
   const { t, currentLanguage } = useLanguage();
@@ -15,13 +27,28 @@ export function ContactSection() {
 
   const handleDownloadDocx = async () => {
     try {
+      console.log('Starting DOCX generation...'); 
       setIsGenerating(true);
-      const blob = await generateWordDocument(t);
+      
+      // Динамический импорт
+      const utils = await importUtils();
+      if (!utils) {
+        throw new Error('Could not import utils');
+      }
+      
+      console.log('Calling generateWordDocument...');
+      const blob = await utils.generateWordDocument(t, currentLanguage);
+      console.log('Generated blob:', blob);
+      
       const filename = `Olga_Morozova_Portfolio_${currentLanguage}_${new Date().toISOString().split('T')[0]}.docx`;
-      downloadWordDocument(blob, filename);
+      console.log('Downloading with filename:', filename);
+      
+      utils.downloadWordDocument(blob, filename);
+      console.log('Download initiated');
     } catch (error) {
       console.error('Error generating DOCX:', error);
-      // Можно добавить уведомление об ошибке
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      alert('Ошибка при генерации документа: ' + errorMessage);
     } finally {
       setIsGenerating(false);
     }

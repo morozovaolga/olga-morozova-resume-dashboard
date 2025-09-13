@@ -51,6 +51,7 @@ const translations = {
     'about.p1': 'I help organizations and people find, structure, and use knowledge.',
     'about.p2': 'My experience includes digital libraries, educational platforms, and content strategies.',
     'about.p3': 'I am passionate about making knowledge accessible and useful for everyone.',
+    'about.highlights': 'Key Qualities:',
     'about.desiredTitle': 'Desired Position',
     'about.desiredPosition': 'Digital Knowledge Manager / Content Strategist',
     'about.employment': 'Full-time, remote or hybrid, project work.',
@@ -345,6 +346,7 @@ const translations = {
     'about.p1': 'Помогаю организациям и людям находить, структурировать и использовать знания.',
     'about.p2': 'В моём опыте — цифровые библиотеки, образовательные платформы, контент-стратегии.',
     'about.p3': 'Меня вдохновляет делать знания доступными и полезными для всех.',
+    'about.highlights': 'Ключевые качества:',
     'about.desiredTitle': 'Желаемая позиция',
     'about.desiredPosition': 'Руководитель цифровых знаний / Контент-стратег',
     'about.employment': 'Полная занятость, удалённо или гибрид, проектная работа.',
@@ -622,6 +624,7 @@ const translations = {
     'about.text1': 'Directrice de contenu numérique expérimentée avec plus de 7 ans d\'expertise dans la gestion de contenu numérique, la stratégie et l\'innovation dans le secteur culturel.',
     'about.text2': 'J\'ai dirigé avec succès des projets transformationnels à la Bibliothèque d\'État russe, gérant des initiatives numériques à grande échelle et favorisant des partenariats stratégiques.',
     'about.text3': 'Ma passion réside dans l\'intersection de la technologie et de la culture, créant des expériences numériques engageantes qui rendent le patrimoine culturel accessible aux audiences modernes.',
+    'about.highlights': 'Qualités clés :',
 
     // Experience Section
     'experience.title': 'Expérience professionnelle',

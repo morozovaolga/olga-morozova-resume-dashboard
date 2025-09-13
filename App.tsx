@@ -4,6 +4,7 @@ import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
 import { SkillsSection } from './components/SkillsSection';
 import { ExperienceSection } from './components/ExperienceSection';
+import { CaseStudiesSection } from './components/CaseStudiesSection';
 import { PortfolioSection } from './components/PortfolioSection';
 import { EducationSection } from './components/EducationSection';
 import { ContactSection } from './components/ContactSection';
@@ -73,6 +74,7 @@ export default function App() {
         <AboutSection />
         <SkillsSection />
         <ExperienceSection />
+        <CaseStudiesSection />
         <PortfolioSection />
         <EducationSection />
         <ContactSection />

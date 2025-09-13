@@ -4,6 +4,7 @@ type Language = 'en' | 'ru' | 'fr';
 
 interface LanguageContextType {
   language: Language;
+  currentLanguage: Language;
   toggleLanguage: () => void;
   setLanguage: (lang: Language) => void;
   t: (key: TranslationKey) => string;
@@ -301,9 +302,9 @@ const translations = {
     'cases.pushkin.highlight4': 'Promoted cultural heritage through innovative engagement methods',
     
     // PDF Export
-    'pdf.button': 'Download Portfolio PDF',
-    'pdf.description': 'Complete portfolio in PDF format',
-    'pdf.generating': 'Generating PDF...',
+    'pdf.button': 'Download Portfolio DOCX',
+    'pdf.description': 'Complete portfolio in DOCX format',
+    'pdf.generating': 'Generating...',
     'pdf.error': 'An error occurred while creating the PDF. Please try again.',
   } as const,
   
@@ -595,9 +596,9 @@ const translations = {
     'cases.pushkin.highlight4': 'Продвижение культурного наследия через инновационные методы взаимодействия',
     
     // PDF Export
-    'pdf.button': 'Скачать портфолио в PDF',
-    'pdf.description': 'Полное портфолио в формате PDF',
-    'pdf.generating': 'Создание PDF...',
+    'pdf.button': 'Скачать портфолио в DOCX',
+    'pdf.description': 'Полное портфолио в формате DOCX',
+    'pdf.generating': 'Генерирую...',
     'pdf.error': 'Произошла ошибка при создании PDF. Попробуйте еще раз.',
   } as const,
   fr: {
@@ -796,9 +797,9 @@ const translations = {
     'cases.pushkin.highlight4': 'Promotion du patrimoine culturel par des méthodes d\'engagement innovantes',
 
     // PDF Export
-    'pdf.button': 'Télécharger le portfolio PDF',
-    'pdf.description': 'Portfolio complet en format PDF',
-    'pdf.generating': 'Génération du PDF...',
+    'pdf.button': 'Télécharger le portfolio DOCX',
+    'pdf.description': 'Portfolio complet en format DOCX',
+    'pdf.generating': 'Génération...',
     'pdf.error': 'Une erreur s\'est produite lors de la création du PDF. Veuillez réessayer.',
   } as const
 } as const;
@@ -828,7 +829,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   };
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, currentLanguage: language, toggleLanguage, setLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );

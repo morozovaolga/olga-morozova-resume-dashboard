@@ -6,9 +6,26 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { useLanguage } from '../contexts/LanguageContext';
+import { generateWordDocument, downloadWordDocument } from '../utils/portfolioGenerator';
+import { useState } from 'react';
 
 export function ContactSection() {
-  const { t } = useLanguage();
+  const { t, currentLanguage } = useLanguage();
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const handleDownloadDocx = async () => {
+    try {
+      setIsGenerating(true);
+      const blob = await generateWordDocument(t);
+      const filename = `Olga_Morozova_Portfolio_${currentLanguage}_${new Date().toISOString().split('T')[0]}.docx`;
+      downloadWordDocument(blob, filename);
+    } catch (error) {
+      console.error('Error generating DOCX:', error);
+      // Можно добавить уведомление об ошибке
+    } finally {
+      setIsGenerating(false);
+    }
+  };
   
   const contactMethods = [
     {
@@ -110,7 +127,7 @@ export function ContactSection() {
           </motion.div>
         </div>
 
-        {/* PDF Download Button */}
+        {/* DOCX Download Button */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -118,16 +135,16 @@ export function ContactSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-12 text-center"
         >
-          <a
-            href="#" // Здесь будет ваша ссылка на PDF
-            download
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 bg-gray-900 text-white hover:bg-gray-800 hover:scale-105 shadow-lg hover:shadow-xl border border-gray-700"
+          <button
+            onClick={handleDownloadDocx}
+            disabled={isGenerating}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 bg-gray-900 text-white hover:bg-gray-800 hover:scale-105 shadow-lg hover:shadow-xl border border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
-            {t('pdf.button')}
-          </a>
+            {isGenerating ? t('pdf.generating') : t('pdf.button')}
+          </button>
           <p className="mt-2 text-sm text-gray-500">
             {t('pdf.description')}
           </p>

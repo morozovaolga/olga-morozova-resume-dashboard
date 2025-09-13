@@ -38,3 +38,5 @@ dist-ssr
 # Old version folder (contains previous project version)
 cv_v1/
 old_dist/
+
+.vercel

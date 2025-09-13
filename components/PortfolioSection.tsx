@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 // Типы для портфолио
 type PortfolioItem = {
   title: string;
-  url: string;
+  url?: string;
   description: string;
 };
 type PortfolioCategory = {
@@ -139,28 +139,48 @@ function getDefaultPortfolio(t: (key: any) => string, language: string): Portfol
       items: [
         {
           title: t('portfolio.texts1'),
-          url: 'https://www.rsl.ru/ru/events/afisha/vistavki/dni-kultury-tadzhikistana-v-rgb',
+          url: t('portfolio.texts1Url'),
           description: t('portfolio.texts1Desc')
         },
         {
           title: t('portfolio.texts2'),
-          url: 'https://www.rsl.ru/ru/all-news/xviii-fedorovskie-chtenia',
+          url: t('portfolio.texts2Url'),
           description: t('portfolio.texts2Desc')
         },
         {
           title: t('portfolio.texts3'),
-          url: 'https://www.rsl.ru/ru/events/afisha/meetings/kruglyij-stol-unikalnyij-lingvisticheskij-fond',
+          url: t('portfolio.texts3Url'),
           description: t('portfolio.texts3Desc')
         },
         {
           title: t('portfolio.texts4'),
-          url: 'https://www.rsl.ru/ru/events/afisha/meetings/kruglyij-stol-den-oon-v-rgb-2019',
+          url: t('portfolio.texts4Url'),
           description: t('portfolio.texts4Desc')
         },
         {
           title: t('portfolio.texts5'),
-          url: 'https://www.rsl.ru/ru/all-news/fotovyistavka-pejzazhej-yuzhnogo-berega-kryima',
+          url: t('portfolio.texts5Url'),
           description: t('portfolio.texts5Desc')
+        },
+        {
+          title: t('portfolio.texts6'),
+          url: t('portfolio.texts6Url'),
+          description: t('portfolio.texts6Desc')
+        },
+        {
+          title: t('portfolio.texts7'),
+          url: t('portfolio.texts7Url'),
+          description: t('portfolio.texts7Desc')
+        },
+        {
+          title: t('portfolio.texts8'),
+          url: t('portfolio.texts8Url'),
+          description: t('portfolio.texts8Desc')
+        },
+        {
+          title: t('portfolio.texts9'),
+          url: t('portfolio.texts9Url'),
+          description: t('portfolio.texts9Desc')
         }
       ]
     },
@@ -257,18 +277,34 @@ export function PortfolioSection() {
                           <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
                             <FileText className="w-4 h-4 text-white" />
                           </div>
+                          {item.url && (
+                            <a
+                              href={item.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-gray-400 hover:text-gray-600 transition-colors"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                            </a>
+                          )}
+                        </div>
+                        
+                        {item.url ? (
                           <a
                             href={item.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-gray-400 hover:text-gray-600 transition-colors"
+                            className="block hover:no-underline group-hover:text-gray-700 transition-colors"
                           >
-                            <ExternalLink className="w-4 h-4" />
+                            <h4 className="mb-2 text-gray-900 leading-snug hover:text-gray-700 transition-colors">{item.title}</h4>
+                            <p className="text-sm text-gray-600 leading-relaxed hover:text-gray-700 transition-colors">{item.description}</p>
                           </a>
-                        </div>
-                        
-                        <h4 className="mb-2 text-gray-900 leading-snug">{item.title}</h4>
-                        <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
+                        ) : (
+                          <div>
+                            <h4 className="mb-2 text-gray-900 leading-snug">{item.title}</h4>
+                            <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>

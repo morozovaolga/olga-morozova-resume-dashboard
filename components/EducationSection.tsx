@@ -20,7 +20,7 @@ export function EducationSection() {
   ];
 
   const certifications = [
-    { name: t('education.cert1'), org: 'Simulative', year: '2025' },
+    { name: t('education.cert1'), org: 'Scrumtrek', year: '2025' },
     { name: t('education.cert2'), org: 'Simulative', year: '2025' },
     { name: t('education.cert3'), org: 'Atlassian', year: '2025' },
     { name: t('education.cert4'), org: t('education.certOrg4'), year: '2025' },

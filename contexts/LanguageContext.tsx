@@ -307,6 +307,10 @@ const translations = {
     'pdf.description': 'Complete portfolio in DOCX format',
     'pdf.generating': 'Generating...',
     'pdf.error': 'An error occurred while creating the PDF. Please try again.',
+    
+    // Case Studies buttons
+    'cases.showDetails': 'Show Details',
+    'cases.hideDetails': 'Hide Details',
   } as const,
   
   ru: {
@@ -602,6 +606,10 @@ const translations = {
     'pdf.description': 'Полное портфолио в формате DOCX',
     'pdf.generating': 'Генерирую...',
     'pdf.error': 'Произошла ошибка при создании PDF. Попробуйте еще раз.',
+    
+    // Case Studies buttons
+    'cases.showDetails': 'Показать детали',
+    'cases.hideDetails': 'Скрыть детали',
   } as const,
   fr: {
     // Navigation
@@ -804,6 +812,10 @@ const translations = {
     'pdf.description': 'Portfolio complet en format DOCX',
     'pdf.generating': 'Génération...',
     'pdf.error': 'Une erreur s\'est produite lors de la création du PDF. Veuillez réessayer.',
+    
+    // Case Studies buttons
+    'cases.showDetails': 'Voir les détails',
+    'cases.hideDetails': 'Masquer les détails',
   } as const
 } as const;
 

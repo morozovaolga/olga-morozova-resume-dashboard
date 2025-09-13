@@ -180,10 +180,10 @@ export function CaseStudiesSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+          <h2 className="text-3xl lg:text-4xl mb-6 text-gray-900">
             {t('cases.title')}
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             {t('cases.subtitle')}
           </p>
         </motion.div>
@@ -248,7 +248,7 @@ export function CaseStudiesSection() {
                     onClick={() => toggleCase(caseStudy.id)}
                     className="inline-flex items-center px-6 py-3 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
                   >
-                    {expandedCase === caseStudy.id ? 'Скрыть детали' : 'Показать детали'}
+                    {expandedCase === caseStudy.id ? t('cases.hideDetails') : t('cases.showDetails')}
                     <svg 
                       className={`ml-2 w-4 h-4 transition-transform ${expandedCase === caseStudy.id ? 'rotate-180' : ''}`}
                       fill="none" 

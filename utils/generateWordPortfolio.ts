@@ -2,11 +2,11 @@ import {
   Document, 
   Paragraph, 
   TextRun, 
-  HeadingLevel, 
   AlignmentType, 
   BorderStyle,
   SectionType,
-  ISectionOptions
+  ISectionOptions,
+  convertMillimetersToTwip
 } from 'docx';
 import { getDocxTranslation, type Language } from '../translations/docxTranslations';
 
@@ -43,6 +43,7 @@ interface PortfolioData {
       degree: string;
       institution: string;
       program?: string;
+      year?: string;
     }>;
     certifications: string[];
   };
@@ -112,16 +113,21 @@ export class WordPortfolioGenerator {
 
   private createSectionTitle(text: string): Paragraph {
     return new Paragraph({
-      text: text,
-      heading: HeadingLevel.HEADING_1,
+      children: [
+        new TextRun({
+          text: text,
+          bold: true,
+          size: 24, // 12pt шрифт для основных заголовков
+        }),
+      ],
       spacing: {
-        before: 400,
-        after: 200,
+        before: 200, // Еще больше уменьшили
+        after: 100,  // Еще больше уменьшили
       },
       border: {
         bottom: {
           color: "4472C4",
-          size: 6,
+          size: 3, // Еще тоньше линия
           style: BorderStyle.SINGLE,
         },
       },
@@ -130,11 +136,16 @@ export class WordPortfolioGenerator {
 
   private createSubSectionTitle(text: string): Paragraph {
     return new Paragraph({
-      text: text,
-      heading: HeadingLevel.HEADING_2,
+      children: [
+        new TextRun({
+          text: text,
+          bold: true,
+          size: 22, // 11pt шрифт для подзаголовков
+        }),
+      ],
       spacing: {
-        before: 300,
-        after: 150,
+        before: 160, // Уменьшили еще больше
+        after: 80,   // Уменьшили еще больше
       },
     });
   }
@@ -145,10 +156,11 @@ export class WordPortfolioGenerator {
         new TextRun({
           text: text,
           bold: bold,
+          size: 18, // 9pt шрифт (уменьшили с 20)
         }),
       ],
       spacing: {
-        after: 120,
+        after: 60, // Уменьшили с 80
       },
     });
   }
@@ -158,13 +170,88 @@ export class WordPortfolioGenerator {
       children: [
         new TextRun({
           text: `• ${text}`,
+          size: 18, // 9pt шрифт (уменьшили с 20)
         }),
       ],
       spacing: {
-        after: 80,
+        after: 40, // Уменьшили с 60
       },
       indent: {
-        left: 360,
+        left: 240, // Уменьшили отступ с 280
+      },
+    });
+  }
+
+  private createProjectBulletPoint(title: string, description: string, url?: string): Paragraph[] {
+    const paragraphs = [
+      new Paragraph({
+        children: [
+          new TextRun({
+            text: `• ${title}`,
+            bold: true,
+            size: 17, // 8.5pt для заголовков проектов (уменьшили с 19)
+          }),
+        ],
+        spacing: {
+          after: 20, // Уменьшили с 30
+        },
+        indent: {
+          left: 240, // Уменьшили с 280
+        },
+      }),
+      new Paragraph({
+        children: [
+          new TextRun({
+            text: description,
+            size: 16, // 8pt для описаний (уменьшили с 18)
+          }),
+        ],
+        spacing: {
+          after: url ? 15 : 40, // Уменьшили
+        },
+        indent: {
+          left: 320, // Уменьшили с 360
+        },
+      }),
+    ];
+
+    if (url) {
+      paragraphs.push(
+        new Paragraph({
+          children: [
+            new TextRun({
+              text: `${this.t('portfolio.linkPrefix')} ${url}`,
+              size: 14, // 7pt для ссылок (уменьшили с 16)
+              color: "4472C4",
+              italics: true,
+            }),
+          ],
+          spacing: {
+            after: 40, // Уменьшили с 60
+          },
+          indent: {
+            left: 320, // Уменьшили с 360
+          },
+        })
+      );
+    }
+
+    return paragraphs;
+  }
+
+  private createCompactBulletPoint(text: string): Paragraph {
+    return new Paragraph({
+      children: [
+        new TextRun({
+          text: `• ${text}`,
+          size: 16, // 8pt шрифт для компактности (уменьшили с 18)
+        }),
+      ],
+      spacing: {
+        after: 30, // Уменьшили с 40
+      },
+      indent: {
+        left: 240, // Уменьшили с 280
       },
     });
   }
@@ -173,28 +260,39 @@ export class WordPortfolioGenerator {
     const children = [
       // Заголовок
       new Paragraph({
-        text: this.data.name,
-        heading: HeadingLevel.TITLE,
+        children: [
+          new TextRun({
+            text: this.data.name,
+            bold: true,
+            size: 28, // 14pt шрифт для имени
+          }),
+        ],
         alignment: AlignmentType.CENTER,
         spacing: {
-          after: 200,
+          after: 80, // Уменьшили с 120
         },
       }),
       new Paragraph({
-        text: this.data.title,
+        children: [
+          new TextRun({
+            text: this.data.title,
+            size: 20, // 10pt шрифт (уменьшили с 22)
+            bold: true,
+          }),
+        ],
         alignment: AlignmentType.CENTER,
         spacing: {
-          after: 150,
+          after: 80, // Уменьшили с 100
         },
       }),
       this.createBodyParagraph(this.data.description),
 
       // Контакты
       this.createSectionTitle(this.t('contact.sectionTitle')),
-      this.createBodyParagraph(`${this.t('contact.phone')}: ${this.data.contacts.phone}`),
-      this.createBodyParagraph(`${this.t('contact.email')}: ${this.data.contacts.email}`),
-      this.createBodyParagraph(`${this.t('contact.telegram')}: ${this.data.contacts.telegram}`),
-      this.createBodyParagraph(`${this.t('contact.location')}: ${this.data.contacts.location}`),
+      this.createCompactBulletPoint(`${this.t('contact.phone')}: ${this.data.contacts.phone}`),
+      this.createCompactBulletPoint(`${this.t('contact.email')}: ${this.data.contacts.email}`),
+      this.createCompactBulletPoint(`${this.t('contact.telegram')}: ${this.data.contacts.telegram}`),
+      this.createCompactBulletPoint(`${this.t('contact.location')}: ${this.data.contacts.location}`),
 
       // О себе
       this.createSectionTitle(this.t('about.sectionTitle')),
@@ -224,13 +322,27 @@ export class WordPortfolioGenerator {
     // Навыки
     children.push(
       this.createSectionTitle(this.t('skills.sectionTitle')),
-      this.createSubSectionTitle(this.t('skills.professional')),
-      this.createBodyParagraph(this.data.skills.professional.join(" • ")),
-      this.createSubSectionTitle(this.t('skills.technical')),
-      this.createBodyParagraph(this.data.skills.technical.join(" • ")),
-      this.createSubSectionTitle(this.t('skills.languages')),
-      this.createBodyParagraph(this.data.skills.languages.join(" • "))
+      this.createSubSectionTitle(this.t('skills.professional'))
     );
+    
+    // Профессиональные навыки как маркированный список
+    this.data.skills.professional.forEach(skill => {
+      children.push(this.createCompactBulletPoint(skill));
+    });
+
+    children.push(this.createSubSectionTitle(this.t('skills.technical')));
+    
+    // Технические навыки как маркированный список
+    this.data.skills.technical.forEach(skill => {
+      children.push(this.createCompactBulletPoint(skill));
+    });
+
+    children.push(this.createSubSectionTitle(this.t('skills.languages')));
+    
+    // Языки как маркированный список
+    this.data.skills.languages.forEach(lang => {
+      children.push(this.createCompactBulletPoint(lang));
+    });
 
     // Образование
     children.push(
@@ -240,7 +352,7 @@ export class WordPortfolioGenerator {
 
     this.data.education.degrees.forEach(degree => {
       children.push(
-        this.createBodyParagraph(`${degree.degree}\n${degree.institution}${degree.program ? `\nПрограмма: ${degree.program}` : ''}`)
+        this.createBodyParagraph(`${degree.degree}\n${degree.institution}${degree.program ? `\nПрограмма: ${degree.program}` : ''}${degree.year ? `\nГод окончания: ${degree.year}` : ''}`)
       );
     });
 
@@ -296,13 +408,8 @@ export class WordPortfolioGenerator {
     if (this.data.portfolio.landingProjects && this.data.portfolio.landingProjects.length > 0) {
       children.push(this.createSubSectionTitle(this.t('portfolio.landingProjects')));
       this.data.portfolio.landingProjects.forEach(item => {
-        children.push(
-          this.createSubSectionTitle(item.title),
-          this.createBodyParagraph(item.description)
-        );
-        if (item.url) {
-          children.push(this.createBodyParagraph(`${this.t('portfolio.linkPrefix')} ${item.url}`));
-        }
+        const projectParagraphs = this.createProjectBulletPoint(item.title, item.description, item.url);
+        children.push(...projectParagraphs);
       });
     }
 
@@ -310,13 +417,8 @@ export class WordPortfolioGenerator {
     if (this.data.portfolio.posters && this.data.portfolio.posters.length > 0) {
       children.push(this.createSubSectionTitle(this.t('portfolio.posters')));
       this.data.portfolio.posters.forEach(item => {
-        children.push(
-          this.createSubSectionTitle(item.title),
-          this.createBodyParagraph(item.description)
-        );
-        if (item.url) {
-          children.push(this.createBodyParagraph(`${this.t('portfolio.linkPrefix')} ${item.url}`));
-        }
+        const projectParagraphs = this.createProjectBulletPoint(item.title, item.description, item.url);
+        children.push(...projectParagraphs);
       });
     }
 
@@ -324,13 +426,8 @@ export class WordPortfolioGenerator {
     if (this.data.portfolio.manuals && this.data.portfolio.manuals.length > 0) {
       children.push(this.createSubSectionTitle(this.t('portfolio.manuals')));
       this.data.portfolio.manuals.forEach(item => {
-        children.push(
-          this.createSubSectionTitle(item.title),
-          this.createBodyParagraph(item.description)
-        );
-        if (item.url) {
-          children.push(this.createBodyParagraph(`${this.t('portfolio.linkPrefix')} ${item.url}`));
-        }
+        const projectParagraphs = this.createProjectBulletPoint(item.title, item.description, item.url);
+        children.push(...projectParagraphs);
       });
     }
 
@@ -338,13 +435,8 @@ export class WordPortfolioGenerator {
     if (this.data.portfolio.digitalMerch && this.data.portfolio.digitalMerch.length > 0) {
       children.push(this.createSubSectionTitle(this.t('portfolio.digitalMerch')));
       this.data.portfolio.digitalMerch.forEach(item => {
-        children.push(
-          this.createSubSectionTitle(item.title),
-          this.createBodyParagraph(item.description)
-        );
-        if (item.url) {
-          children.push(this.createBodyParagraph(`${this.t('portfolio.linkPrefix')} ${item.url}`));
-        }
+        const projectParagraphs = this.createProjectBulletPoint(item.title, item.description, item.url);
+        children.push(...projectParagraphs);
       });
     }
 
@@ -352,13 +444,8 @@ export class WordPortfolioGenerator {
     if (this.data.portfolio.texts && this.data.portfolio.texts.length > 0) {
       children.push(this.createSubSectionTitle(this.t('portfolio.texts')));
       this.data.portfolio.texts.forEach(item => {
-        children.push(
-          this.createSubSectionTitle(item.title),
-          this.createBodyParagraph(item.description)
-        );
-        if (item.url) {
-          children.push(this.createBodyParagraph(`${this.t('portfolio.linkPrefix')} ${item.url}`));
-        }
+        const projectParagraphs = this.createProjectBulletPoint(item.title, item.description, item.url);
+        children.push(...projectParagraphs);
       });
     }
 
@@ -366,13 +453,8 @@ export class WordPortfolioGenerator {
     if (this.data.portfolio.graphicDesign && this.data.portfolio.graphicDesign.length > 0) {
       children.push(this.createSubSectionTitle(this.t('portfolio.graphicDesign')));
       this.data.portfolio.graphicDesign.forEach(item => {
-        children.push(
-          this.createSubSectionTitle(item.title),
-          this.createBodyParagraph(item.description)
-        );
-        if (item.url) {
-          children.push(this.createBodyParagraph(`${this.t('portfolio.linkPrefix')} ${item.url}`));
-        }
+        const projectParagraphs = this.createProjectBulletPoint(item.title, item.description, item.url);
+        children.push(...projectParagraphs);
       });
     }
 
@@ -390,6 +472,14 @@ export class WordPortfolioGenerator {
     const section: ISectionOptions = {
       properties: {
         type: SectionType.CONTINUOUS,
+        page: {
+          margin: {
+            top: convertMillimetersToTwip(10),    // Еще меньше поля до 1см
+            right: convertMillimetersToTwip(10),
+            bottom: convertMillimetersToTwip(10),
+            left: convertMillimetersToTwip(10),
+          },
+        },
       },
       children: children,
     };

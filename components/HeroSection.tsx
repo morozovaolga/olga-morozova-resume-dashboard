@@ -3,11 +3,55 @@ import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ArrowDown, Mail, Phone, MessageCircle, MapPin } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useState } from 'react';
+
+// Динамический импорт для проверки
+async function importUtils() {
+  try {
+    console.log('Attempting dynamic import...');
+    const module = await import('../utils/portfolioGenerator');
+    console.log('Import successful:', module);
+    return module;
+  } catch (error) {
+    console.error('Dynamic import failed:', error);
+    return null;
+  }
+}
 
 const image_olga = 'https://ladobor.ru/olga/portfolio/img/olga.jpg';
 
 export function HeroSection() {
-  const { t, language } = useLanguage();
+  const { t, language, currentLanguage } = useLanguage();
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const handleDownloadDocx = async () => {
+    try {
+      console.log('Starting DOCX generation...');
+      setIsGenerating(true);
+      
+      // Динамический импорт
+      const utils = await importUtils();
+      if (!utils) {
+        throw new Error('Could not import utils');
+      }
+      
+      console.log('Calling generateWordDocument...');
+      const blob = await utils.generateWordDocument(t, currentLanguage);
+      console.log('Generated blob:', blob);
+      
+      const filename = `Olga_Morozova_Portfolio_${currentLanguage}_${new Date().toISOString().split('T')[0]}.docx`;
+      console.log('Downloading with filename:', filename);
+      
+      utils.downloadWordDocument(blob, filename);
+      console.log('Download initiated');
+    } catch (error) {
+      console.error('Error generating DOCX:', error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      alert('Ошибка при генерации документа: ' + errorMessage);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
   
   const scrollToPortfolio = () => {
     setTimeout(() => {
@@ -46,7 +90,7 @@ export function HeroSection() {
         <meta property="twitter:title" content={currentMeta.title} />
         <meta property="twitter:description" content={currentMeta.description} />
       </Helmet>
-      <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-50 to-white pt-24">
+      <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-50 to-white pt-12 lg:pt-24">
         <div className="max-w-6xl mx-auto px-6 py-4 sm:py-8 lg:py-12 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
           
           {/* Текстовая часть */}
@@ -126,6 +170,25 @@ export function HeroSection() {
                   <span>{t('hero.githubButton')}</span>
                 </motion.a>
               </div>
+
+              {/* DOCX Download Button */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+                className="text-center lg:text-left"
+              >
+                <button
+                  onClick={handleDownloadDocx}
+                  disabled={isGenerating}
+                  className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors text-sm underline decoration-gray-300 hover:decoration-gray-500 underline-offset-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  {isGenerating ? t('pdf.generating') : t('pdf.button')}
+                </button>
+              </motion.div>
             </motion.div>
           </motion.div>
 

@@ -186,6 +186,12 @@ const translations = {
     
     // Graphic Design Portfolio
     'portfolio.graphicDesign': 'Graphic Design',
+    'portfolio.socialIllustrations': 'Social Media Illustrations',
+    'portfolio.socialIllustrationsDesc': 'Collection of illustrations for social media posts and promotional materials',
+    'portfolio.bookCovers': 'Book Covers',
+    'portfolio.bookCoversDesc': 'Creative book cover designs with modern typography and visual elements',
+    'portfolio.postersAndDiplomas': 'Posters and Diplomas',
+    'portfolio.postersAndDiplomasDesc': 'Event posters, certificates, and diploma designs for various organizations',
     'portfolio.designProjects': 'Design Projects',
     'portfolio.printMaterials': 'Print Materials',
     'portfolio.digitalDesign': 'Digital Design',
@@ -303,10 +309,10 @@ const translations = {
     'cases.pushkin.highlight4': 'Promoted cultural heritage through innovative engagement methods',
     
     // PDF Export
-    'pdf.button': 'Download Portfolio DOCX',
-    'pdf.description': 'Complete portfolio in DOCX format',
+    'pdf.button': 'Download Resume DOCX',
+    'pdf.description': 'Complete resume in DOCX format',
     'pdf.generating': 'Generating...',
-    'pdf.error': 'An error occurred while creating the PDF. Please try again.',
+    'pdf.error': 'An error occurred while creating the DOCX. Please try again.',
     
     // Case Studies buttons
     'cases.showDetails': 'Show Details',
@@ -485,6 +491,12 @@ const translations = {
     
     // Graphic Design Portfolio
     'portfolio.graphicDesign': 'Графический дизайн',
+    'portfolio.socialIllustrations': 'Иллюстрации для соцсетей',
+    'portfolio.socialIllustrationsDesc': 'Коллекция иллюстраций для постов в социальных сетях и рекламных материалов',
+    'portfolio.bookCovers': 'Книжные обложки',
+    'portfolio.bookCoversDesc': 'Креативные дизайны обложек книг с современной типографикой и визуальными элементами',
+    'portfolio.postersAndDiplomas': 'Постеры и дипломы',
+    'portfolio.postersAndDiplomasDesc': 'Постеры для мероприятий, сертификаты и дипломы для различных организаций',
     'portfolio.designProjects': 'Дизайн-проекты',
     'portfolio.printMaterials': 'Печатные материалы',
     'portfolio.digitalDesign': 'Цифровой дизайн',
@@ -602,10 +614,10 @@ const translations = {
     'cases.pushkin.highlight4': 'Продвижение культурного наследия через инновационные методы взаимодействия',
     
     // PDF Export
-    'pdf.button': 'Скачать портфолио в DOCX',
-    'pdf.description': 'Полное портфолио в формате DOCX',
+    'pdf.button': 'Скачать резюме в DOCX',
+    'pdf.description': 'Полное резюме в формате DOCX',
     'pdf.generating': 'Генерирую...',
-    'pdf.error': 'Произошла ошибка при создании PDF. Попробуйте еще раз.',
+    'pdf.error': 'Произошла ошибка при создании DOCX. Попробуйте еще раз.',
     
     // Case Studies buttons
     'cases.showDetails': 'Показать детали',
@@ -688,6 +700,15 @@ const translations = {
     'portfolio.texts9': 'Rendez-vous avec Cthulhu',
     'portfolio.texts9Desc': 'Un roman sur les monstres marins a capturé les vitrines des librairies',
     'portfolio.texts9Url': 'https://disk.yandex.ru/i/5dekldkfLa54dA',
+    
+    // Graphic Design Portfolio
+    'portfolio.graphicDesign': 'Design Graphique',
+    'portfolio.socialIllustrations': 'Illustrations pour les Réseaux Sociaux',
+    'portfolio.socialIllustrationsDesc': 'Collection d\'illustrations pour les publications sur les réseaux sociaux et matériaux promotionnels',
+    'portfolio.bookCovers': 'Couvertures de Livres',
+    'portfolio.bookCoversDesc': 'Designs créatifs de couvertures de livres avec typographie moderne et éléments visuels',
+    'portfolio.postersAndDiplomas': 'Affiches et Diplômes',
+    'portfolio.postersAndDiplomasDesc': 'Affiches d\'événements, certificats et diplômes pour diverses organisations',
 
     // Education Section
     'education.title': 'Formation',
@@ -808,10 +829,10 @@ const translations = {
     'cases.pushkin.highlight4': 'Promotion du patrimoine culturel par des méthodes d\'engagement innovantes',
 
     // PDF Export
-    'pdf.button': 'Télécharger le portfolio DOCX',
-    'pdf.description': 'Portfolio complet en format DOCX',
+    'pdf.button': 'Télécharger le CV DOCX',
+    'pdf.description': 'Télécharger le CV complet au format DOCX',
     'pdf.generating': 'Génération...',
-    'pdf.error': 'Une erreur s\'est produite lors de la création du PDF. Veuillez réessayer.',
+    'pdf.error': 'Une erreur s\'est produite lors de la création du DOCX. Veuillez réessayer.',
     
     // Case Studies buttons
     'cases.showDetails': 'Voir les détails',

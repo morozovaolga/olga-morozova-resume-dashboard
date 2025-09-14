@@ -68,11 +68,13 @@ export function getPortfolioDataFromLanguageContext(t: (key: any) => string) {
         {
           degree: t('education.degree1'),
           institution: t('education.institution1'),
-          program: t('education.program1')
+          program: t('education.program1'),
+          year: '2005'
         },
         {
           degree: t('education.degree2'),
-          institution: t('education.institution2')
+          institution: t('education.institution2'),
+          year: '2004'
         }
       ].filter(deg => deg.degree && deg.institution),
       certifications: [
@@ -196,18 +198,18 @@ export function getPortfolioDataFromLanguageContext(t: (key: any) => string) {
       ].filter(item => item.title && item.description),
       graphicDesign: [
         {
-          title: t('portfolio.socialIllustrations') || 'Social Media Illustrations',
-          description: t('portfolio.socialIllustrationsDesc') || 'Collection of illustrations for social media posts and promotional materials',
+          title: t('portfolio.socialIllustrations'),
+          description: t('portfolio.socialIllustrationsDesc'),
           url: "https://morozova31.tilda.ws/social"
         },
         {
-          title: t('portfolio.bookCovers') || 'Book Covers', 
-          description: t('portfolio.bookCoversDesc') || 'Creative book cover designs with modern typography and visual elements',
+          title: t('portfolio.bookCovers'), 
+          description: t('portfolio.bookCoversDesc'),
           url: "https://morozova31.tilda.ws/covers"
         },
         {
-          title: t('portfolio.postersAndDiplomas') || 'Posters and Diplomas',
-          description: t('portfolio.postersAndDiplomasDesc') || 'Event posters, certificates, and diploma designs for various organizations',
+          title: t('portfolio.postersAndDiplomas'),
+          description: t('portfolio.postersAndDiplomasDesc'),
           url: "https://morozova31.tilda.ws/posters"
         }
       ].filter(item => item.title && item.description)

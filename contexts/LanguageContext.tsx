@@ -183,6 +183,9 @@ const translations = {
     'portfolio.texts9': 'A Date with Cthulhu',
     'portfolio.texts9Desc': 'A novel about sea monsters captured bookstore windows',
     'portfolio.texts9Url': 'https://disk.yandex.ru/i/5dekldkfLa54dA',
+    'portfolio.texts10': 'Yulia Napolova: "Letters Remain in the Museum"',
+    'portfolio.texts10Desc': 'Interview with the designer of the exhibition "Time to Gather... Prince Yusupov and His Library"',
+    'portfolio.texts10Url': 'https://www.rsl.ru/ru/all-news/julia-napolova-interview',
     
     // Graphic Design Portfolio
     'portfolio.graphicDesign': 'Graphic Design',
@@ -488,6 +491,9 @@ const translations = {
     'portfolio.texts9': 'Свидание с Ктулху',
     'portfolio.texts9Desc': 'Роман про морских чудищ захватил книжные витрины',
     'portfolio.texts9Url': 'https://disk.yandex.ru/i/5dekldkfLa54dA',
+    'portfolio.texts10': 'Юлия Наполова: «Буквы остаются в музее»',
+    'portfolio.texts10Desc': 'Интервью с дизайнером выставки «Время собирать… Князь Юсупов и его библиотека»',
+    'portfolio.texts10Url': 'https://www.rsl.ru/ru/all-news/julia-napolova-interview',
     
     // Graphic Design Portfolio
     'portfolio.graphicDesign': 'Графический дизайн',
@@ -700,6 +706,9 @@ const translations = {
     'portfolio.texts9': 'Rendez-vous avec Cthulhu',
     'portfolio.texts9Desc': 'Un roman sur les monstres marins a capturé les vitrines des librairies',
     'portfolio.texts9Url': 'https://disk.yandex.ru/i/5dekldkfLa54dA',
+    'portfolio.texts10': 'Julia Napolova : « Les lettres restent au musée »',
+    'portfolio.texts10Desc': 'Interview avec la designer de l’exposition « Le temps de rassembler… Le prince Youssoupov et sa bibliothèque »',
+    'portfolio.texts10Url': 'https://www.rsl.ru/ru/all-news/julia-napolova-interview',
     
     // Graphic Design Portfolio
     'portfolio.graphicDesign': 'Design Graphique',
@@ -880,3 +889,4 @@ export const useLanguage = (): LanguageContextType => {
 };
 
 export default LanguageProvider;
+

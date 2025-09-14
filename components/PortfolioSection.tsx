@@ -182,6 +182,12 @@ function getDefaultPortfolio(t: (key: any) => string, language: string): Portfol
           url: t('portfolio.texts9Url'),
           description: t('portfolio.texts9Desc')
         }
+          ,
+          {
+            title: t('portfolio.texts10'),
+            url: t('portfolio.texts10Url'),
+            description: t('portfolio.texts10Desc')
+          }
       ]
     },
     {
